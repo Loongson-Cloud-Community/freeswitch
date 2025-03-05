@@ -1514,7 +1514,9 @@ static switch_status_t switch_h264_encode(switch_codec_t *codec, switch_frame_t 
 		switch_set_flag(frame, SFF_WAIT_KEY_FRAME);
 	}
 
+GCC_DIAG_OFF(deprecated-declarations)
 	av_init_packet(pkt);
+GCC_DIAG_ON(deprecated-declarations)
 	pkt->data = NULL;      // packet data will be allocated by the encoder
 	pkt->size = 0;
 
@@ -1711,7 +1713,9 @@ static switch_status_t switch_h264_decode(switch_codec_t *codec, switch_frame_t 
 		int decoded_len;
 
 		if (size > 0) {
+GCC_DIAG_OFF(deprecated-declarations)
 			av_init_packet(&pkt);
+GCC_DIAG_ON(deprecated-declarations)
 			switch_buffer_write(context->nalu_buffer, ff_input_buffer_padding, sizeof(ff_input_buffer_padding));
 			switch_buffer_peek_zerocopy(context->nalu_buffer, (const void **)&pkt.data);
 			pkt.size = size;

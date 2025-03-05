@@ -65,6 +65,20 @@ avoid_mods=(
 avoid_mods_armhf=(
   languages/mod_v8
 )
+avoid_mods_loongarch64=(
+  languages/mod_v8
+  languages/mod_managed
+  codecs/mod_ilbc
+  codecs/mod_silk
+  codecs/mod_bv
+  asr_tts/mod_flite
+  applications/mod_signalwire
+  asr_tts/mod_pocketsphin
+  asr_tts/mod_pocketsphinx
+  event_handlers/mod_radius_cdr
+  applications/mod_spandsp
+  endpoints/mod_verto
+)
 avoid_mods_sid=(
   directories/mod_ldap
 )
@@ -332,8 +346,7 @@ Build-Depends:
  uuid-dev, libexpat1-dev, libgdbm-dev, libdb-dev,
 # used by many modules
  libcurl4-openssl-dev | libcurl4-gnutls-dev | libcurl-dev,
- bison, zlib1g-dev, libsofia-sip-ua-dev (>= 1.13.6),
- libspandsp3-dev,
+ bison, zlib1g-dev,
 # used to format the private freeswitch apt-repo key properly
  gnupg,
 # module build-depends
@@ -349,7 +362,7 @@ EOF
 print_core_control () {
 cat <<EOF
 Package: freeswitch-all
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: freeswitch-meta-all (= \${binary:Version}), freeswitch-meta-all-dbg (= \${binary:Version})
 Conflicts: freeswitch-all (<= 1.6.7)
 Description: Cross-Platform Scalable Multi-Protocol Soft Switch
@@ -358,7 +371,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  This is a package which depends on all packaged FreeSWITCH modules.
 
 Package: freeswitch
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${shlibs:Depends}, \${perl:Depends}, \${misc:Depends},
  libfreeswitch1 (= \${binary:Version})
 Recommends:
@@ -370,7 +383,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  This package contains the FreeSWITCH core.
 
 Package: libfreeswitch1
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${shlibs:Depends}, \${misc:Depends}, libsofia-sip-ua0 (>= 1.13.6)
 Recommends:
 Suggests: libfreeswitch1-dbg
@@ -382,7 +395,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
 
 Package: python-esl
 Section: python
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${shlibs:Depends}, \${misc:Depends}, \${python:Depends}
 Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  $(debian_wrap "${fs_description}")
@@ -391,7 +404,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
 
 Package: libesl-perl
 Section: perl
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${shlibs:Depends}, \${misc:Depends}, \${perl:Depends}
 Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  $(debian_wrap "${fs_description}")
@@ -399,7 +412,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  This package contains the Perl binding for FreeSWITCH Event Socket Library (ESL).
 
 Package: freeswitch-meta-bare
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version})
 Recommends:
  freeswitch-doc (= \${binary:Version}),
@@ -417,7 +430,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  bare FreeSWITCH install.
 
 Package: freeswitch-meta-default
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-mod-commands (= \${binary:Version}),
  freeswitch-mod-conference (= \${binary:Version}),
@@ -459,7 +472,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  reasonably basic FreeSWITCH install.
 
 Package: freeswitch-meta-vanilla
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-init,
  freeswitch-mod-console (= \${binary:Version}),
@@ -508,7 +521,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  running the FreeSWITCH vanilla example configuration.
 
 Package: freeswitch-meta-sorbet
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
 Recommends:
  freeswitch-init,
@@ -591,7 +604,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  modules except a few which aren't recommended.
 
 Package: freeswitch-meta-all
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-init,
  freeswitch-lang (= \${binary:Version}),
@@ -705,7 +718,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  FreeSWITCH modules.
 
 Package: freeswitch-meta-codecs
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-mod-amr (= \${binary:Version}),
  freeswitch-mod-amrwb (= \${binary:Version}),
@@ -732,7 +745,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  most FreeSWITCH codecs.
 
 Package: freeswitch-meta-codecs-dbg
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-mod-amr-dbg (= \${binary:Version}),
  freeswitch-mod-amrwb-dbg (= \${binary:Version}),
@@ -759,7 +772,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  most FreeSWITCH codecs.
 
 Package: freeswitch-meta-conf
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-conf-curl (= \${binary:Version}),
  freeswitch-conf-insideout (= \${binary:Version}),
@@ -773,7 +786,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  examples for FreeSWITCH.
 
 Package: freeswitch-meta-lang
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-lang-de (= \${binary:Version}),
  freeswitch-lang-en (= \${binary:Version}),
@@ -789,7 +802,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  FreeSWITCH.
 
 Package: freeswitch-meta-mod-say
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-mod-say-de (= \${binary:Version}),
  freeswitch-mod-say-en (= \${binary:Version}),
@@ -814,7 +827,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  FreeSWITCH.
 
 Package: freeswitch-meta-mod-say-dbg
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-mod-say-de-dbg (= \${binary:Version}),
  freeswitch-mod-say-en-dbg (= \${binary:Version}),
@@ -839,7 +852,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
  FreeSWITCH.
 
 Package: freeswitch-meta-all-dbg
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version}),
  freeswitch-meta-codecs-dbg (= \${binary:Version}),
  freeswitch-meta-mod-say (= \${binary:Version}),
@@ -946,7 +959,7 @@ Description: Cross-Platform Scalable Multi-Protocol Soft Switch
 Package: freeswitch-all-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch-meta-all (= \${binary:Version}), freeswitch-meta-all-dbg (= \${binary:Version})
 Description: debugging symbols for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -956,7 +969,7 @@ Description: debugging symbols for FreeSWITCH
 Package: freeswitch-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch (= \${binary:Version})
 Description: debugging symbols for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -966,7 +979,7 @@ Description: debugging symbols for FreeSWITCH
 Package: libfreeswitch1-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, libfreeswitch1 (= \${binary:Version})
 Description: debugging symbols for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -975,7 +988,7 @@ Description: debugging symbols for FreeSWITCH
 
 Package: libfreeswitch-dev
 Section: libdevel
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, freeswitch
 Description: development libraries and header files for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -984,7 +997,7 @@ Description: development libraries and header files for FreeSWITCH
 
 Package: freeswitch-doc
 Section: doc
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}
 Description: documentation for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -997,7 +1010,7 @@ Description: documentation for FreeSWITCH
 ## languages
 
 Package: freeswitch-lang
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-lang-en (= \${binary:Version})
 Description: Language files for FreeSWITCH
@@ -1009,7 +1022,7 @@ Description: Language files for FreeSWITCH
 ## timezones
 
 Package: freeswitch-timezones
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}
 Description: Timezone files for FreeSWITCH
  $(debian_wrap "${fs_description}")
@@ -1023,7 +1036,7 @@ EOF
 if [ ${use_sysvinit} = "true" ]; then
     cat <<EOF
 Package: freeswitch-sysvinit
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, lsb-base (>= 3.0-6), sysvinit | sysvinit-utils
 Conflicts: freeswitch-init
 Provides: freeswitch-init
@@ -1036,7 +1049,7 @@ EOF
 else
     cat <<EOF
 Package: freeswitch-systemd
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}, systemd
 Conflicts: freeswitch-init, freeswitch-all (<= 1.6.7)
 Provides: freeswitch-init
@@ -1054,7 +1067,7 @@ print_mod_control () {
   cat <<EOF
 Package: freeswitch-${module_name//_/-}
 Section: ${m_section}
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 $(debian_wrap "Depends: \${shlibs:Depends}, \${misc:Depends}, libfreeswitch1 (= \${binary:Version}), ${depends}")
 $(debian_wrap "Recommends: ${recommends}")
 $(debian_wrap "Suggests: freeswitch-${module_name//_/-}-dbg, ${suggests}")
@@ -1069,7 +1082,7 @@ Description: ${description} for FreeSWITCH
 Package: freeswitch-${module_name//_/-}-dbg
 Section: debug
 Priority: optional
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends},
  freeswitch-${module_name//_/-} (= \${binary:Version})
 Description: ${description} for FreeSWITCH (debug)
@@ -1134,7 +1147,7 @@ print_conf_overrides () {
 print_conf_control () {
   cat <<EOF
 Package: freeswitch-conf-${conf//_/-}
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}
 Conflicts: freeswitch-all (<= 1.6.7)
 Description: FreeSWITCH ${conf} configuration
@@ -1168,7 +1181,7 @@ print_lang_control () {
   esac
   cat <<EOF
 Package: freeswitch-lang-${lang//_/-}
-Architecture: amd64 armhf
+Architecture: amd64 armhf loongarch64
 Depends: \${misc:Depends}
 Recommends: freeswitch-sounds-${lang}
 Conflicts: freeswitch-all (<= 1.6.7)

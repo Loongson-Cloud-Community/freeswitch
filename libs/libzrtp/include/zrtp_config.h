@@ -119,6 +119,12 @@
  */
 #define ZRTP_BYTE_ORDER ZBO_LITTLE_ENDIAN
 
+#elif defined(__loongarch64)
+/*
+ * loongarch64, little endian
+ */
+#define ZRTP_BYTE_ORDER ZBO_LITTLE_ENDIAN
+
 #elif defined(__e2k__)
 /*
  * Elbrus, little endian
